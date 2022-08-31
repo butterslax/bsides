@@ -2,7 +2,8 @@ import aws_cdk as cdk
 from aws_cdk import aws_s3 as s3
 from aws_cdk import aws_iam as iam
 from constructs import Construct
-import CONSTANTS
+
+# import CONSTANTS
 
 
 class BsidesStack(cdk.Stack):
@@ -15,10 +16,10 @@ class BsidesStack(cdk.Stack):
             bucket_name="typarro-bsides-test-bucket",
             block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
         )
-        s3Bucket.add_to_resource_policy(
-            iam.PolicyStatement(
-                actions=["s3:*"],
-                resources=[s3Bucket.arn_for_objects("*")],
-                principals=[iam.AccountPrincipal(account_id=CONSTANTS.ACCOUNT)],
-            )
-        )
+        # s3Bucket.add_to_resource_policy(
+        #    iam.PolicyStatement(
+        #        actions=["s3:*"],
+        #        resources=[s3Bucket.arn_for_objects("*")],
+        #        principals=[iam.AccountPrincipal(account_id=CONSTANTS.ACCOUNT)],
+        #    )
+        # )
