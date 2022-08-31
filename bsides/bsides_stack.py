@@ -1,23 +1,24 @@
 import aws_cdk as cdk
-from aws_cdk.pipelines import CodePipeline, CodePipelineSource, ShellStep
+from aws_cdk import aws_s3 as s3
+from aws_cdk import aws_iam as iam
 from constructs import Construct
+import CONSTANTS
 
 
 class BsidesStack(cdk.Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        pipeline = CodePipeline(
+        s3Bucket = s3.Bucket(
             self,
-            "Pipeline",
-            pipeline_name="MyPipeline",
-            synth=ShellStep(
-                "Synth",
-                input=CodePipelineSource.git_hub("butterslax/bsides.git", "main"),
-                commands=[
-                    "npm install -g aws-cdk",
-                    "python -m pip install -r requirements.txt",
-                    "cdk synth",
-                ],
-            ),
+            "Bsides Test Bucket",
+            bucket_name="typarro-bsides-test-bucket",
+            block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
+        )
+        s3Bucket.add_to_resource_policy(
+            iam.PolicyStatement(
+                actions=["s3:*"],
+                resources=[s3Bucket.arn_for_objects("*")],
+                principals=[iam.AccountPrincipal(account_id=CONSTANTS.ACCOUNT)],
+            )
         )
