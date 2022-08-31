@@ -18,5 +18,5 @@ test_stack = BsidesStack(
 )
 
 # Aspects.of(test_stack).add(s3_encryption_aspect())
-Aspects.of(test_stack).add(NIST80053R5Checks())
+Aspects.of(test_stack).add(NIST80053R5Checks(verbose=True))
 app.synth()
