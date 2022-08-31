@@ -3,7 +3,7 @@ from aws_cdk import aws_s3 as s3
 from aws_cdk import aws_iam as iam
 from constructs import Construct
 
-# import CONSTANTS
+# import bsides.CONSTANTS as CONSTANTS
 
 
 class BsidesStack(cdk.Stack):

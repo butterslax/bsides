@@ -10,11 +10,11 @@ from bsides.bsides_stack import BsidesStack
 from bsides.aspects import s3_version_aspect, s3_encryption_aspect
 
 app = cdk.App()
-BsidesStack(
+test_stack = BsidesStack(
     app,
     "BsidesStack",
     # env=cdk.Environment(account=CONSTANTS.ACCOUNT, region=CONSTANTS.REGION),
 )
 
-Aspects.of(BsidesStack).add(s3_version_aspect())
+Aspects.of(test_stack).add(s3_encryption_aspect())
 app.synth()
