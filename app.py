@@ -2,7 +2,7 @@
 import os
 
 import aws_cdk as cdk
-import CONSTANTS
+from bsides import CONSTANTS
 from bsides.bsides_stack import BsidesStack
 
 
